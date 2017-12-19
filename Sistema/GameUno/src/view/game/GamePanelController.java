@@ -53,6 +53,8 @@ public class GamePanelController implements ViewController, GameEventsInterface 
 
     @Override
     public void returnPage() {
+        updateGameStatus(GameStatus.FINALIZED);
+        gameModel.setGameStatusInterface(null);
         new MenuPanelController().startView();
     }
 
@@ -173,13 +175,13 @@ public class GamePanelController implements ViewController, GameEventsInterface 
                         if (!gamePaused) {
                             time_remaining--;
                         }
-                        if (time_remaining == 0) {
+                        if (time_remaining == 0 && gameModel.getActualPlayerPosition() == 0) {
                             gameModel.skipCulp();
                             culpAccept = true;
                         }
                         myView.updateTimeForUser(0, time_remaining);
                     }
-                    if(myView.panelColorIsVisible()){
+                    if (myView.panelColorIsVisible()) {
                         gameModel.onUserSelectedNewColor(CardColor.BLUE);
                         myView.setPanelColorsVisible(false);
                     }
@@ -207,14 +209,14 @@ public class GamePanelController implements ViewController, GameEventsInterface 
                     //System.out.println(".run() do RequestMachinePlayerCulp");
                     myView.setTimePlayerVisible(machinePlayerIndex, true);
                     myView.updateTimeForUser(machinePlayerIndex, MAX_TIME_TO_CULP);
+
                     while (time_remaining > 0) {
-                        if (time_remaining == 5) {//Com alguns segundos à IA joga
+                        if (time_remaining == 3) {//Com alguns segundos à IA joga
                             myView.setTimePlayerVisible(machinePlayerIndex, false);
                             gameModel.machineCulp();
                             //refreshPlayerCards(machinePlayerIndex);
                             Thread.currentThread().interrupt();
                             return;
-
                         }
                         try {
                             Thread.sleep(1000);

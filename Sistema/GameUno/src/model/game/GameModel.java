@@ -43,6 +43,7 @@ public class GameModel implements GamePanelEventsInterface {
      * @param gameMode
      */
     public void startNewGame(GameMode gameMode) {
+
         actualGame = new Game();
 
         //Setar o modo de jogo
@@ -54,6 +55,7 @@ public class GameModel implements GamePanelEventsInterface {
         //Instanciar uma nova pilha de cartas que ja foram jogadas
         actualGame.setStackCardPlayed(new Stack());
 
+        actualGame.setStackCard(new Stack());
         //Gerar a pilha de cartas para o jogo
         CardModel cardModel = new CardModel();
         Stack newStack = cardModel.generateCardStack();
@@ -199,19 +201,6 @@ public class GameModel implements GamePanelEventsInterface {
                 players[i].addCardsOnHand(popStackGame());
             }
         }
-
-//        //Simulação
-//        players[0].getCardsOnHand().add(new Card(CardType.ONE, CardColor.YELLOW,"images/cartas/amarela/1.png"));
-//        players[0].getCardsOnHand().add(new Card(CardType.CANCEL, CardColor.YELLOW,"images/cartas/amarela/CANCEL.png"));
-//        
-//        players[1].getCardsOnHand().add(new Card(CardType.PLUS_TWO, CardColor.YELLOW,"images/cartas/amarela/PLUS_TWO.png"));
-//        players[1].getCardsOnHand().add(new Card(CardType.REVERSES, CardColor.BLUE,"images/cartas/azul/REVERSES.png"));
-//
-//        players[2].getCardsOnHand().add(new Card(CardType.CANCEL, CardColor.RED,"images/cartas/vermelha/CANCEL.png"));
-//        players[2].getCardsOnHand().add(new Card(CardType.CANCEL, CardColor.RED,"images/cartas/vermelha/CANCEL.png"));
-//
-//        players[3].getCardsOnHand().add(new Card(CardType.CANCEL, CardColor.RED,"images/cartas/vermelha/CANCEL.png"));
-//        players[3].getCardsOnHand().add(new Card(CardType.CANCEL, CardColor.RED,"images/cartas/vermelha/CANCEL.png"));
     }
 
     /**
@@ -432,14 +421,10 @@ public class GameModel implements GamePanelEventsInterface {
             getActualStakCardPlayed().push(cardToPlay);
             if (isNormalCard(cardToPlay.getCardType()) || isEfectCard(cardToPlay.getCardType())) {
                 switchGameColor(cardToPlay.getCardColor());
-                doCulp(cardIndex);
             } else {
-                //Solicitar nova cor do jogo
-                //indexCardAux = cardIndex;
                 switchGameColor(CardColor.BLUE);
-                doCulp(cardIndex);
-                //requestNewGameColor();
             }
+            doCulp(cardIndex);
 
         } else {
             throw new GameException("Jogada recusada");
