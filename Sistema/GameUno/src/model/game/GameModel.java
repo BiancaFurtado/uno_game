@@ -8,6 +8,7 @@ package model.game;
 import exception.GameException;
 import view.game.GamePanelEventsInterface;
 import java.util.ArrayList;
+import java.util.EmptyStackException;
 import java.util.Iterator;
 import java.util.Random;
 import java.util.Stack;
@@ -573,7 +574,7 @@ public class GameModel implements GamePanelEventsInterface {
             for (int i = 0; i < quant; i++) {
                 getActualPlayer().getCardsOnHand().add(getActualStakCard().pop());
             }
-        } catch (Exception e) {
+        } catch (EmptyStackException e) {
             System.out.println("Pilha de cartas está vazia");
             AppLog.error("Pilha de cartas está vazia");
         }
@@ -632,10 +633,21 @@ public class GameModel implements GamePanelEventsInterface {
     public int[] getGameCurrentTime() {
         return actualGame.getGameTime();
     }
-
+    public Game getActualGame(){
+        return actualGame;
+    }
+    
+    /***
+     * Metodo para dropar 1 carta para o usuario i
+     * @param i Posicao do jogador na mesa
+     */
     public void popStackCardForUser(int i) {
-        getGamePlayers()[i].getCardsOnHand().add(getActualStakCard().pop());
-        gameEvents.refreshPlayerCards(getActualPlayerPosition());
+        try {
+            getGamePlayers()[i].getCardsOnHand().add(getActualStakCard().pop());
+            gameEvents.refreshPlayerCards(getActualPlayerPosition());
+        } catch (NullPointerException e) {
+            System.out.println("Interface Null");
+        }
     }
 
     public void updateGameSide(Sense sense) {
@@ -664,14 +676,6 @@ public class GameModel implements GamePanelEventsInterface {
         switchGameColor(c);
         doCulp(indexCardAux);
         indexCardAux = -1;
-    }
-
-    private void requestNewGameColor() {
-        if (getActualPlayer().getMyType().equals(Player.PlayerType.HUMAN)) {
-            gameEvents.requestLoggedPlayerNewGameColor();
-        } else {
-            switchGameColor(CardColor.BLUE);
-        }
     }
 
     private void doCulp(int cardIndex) {

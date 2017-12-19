@@ -21,7 +21,7 @@ public class Player {
      */
     private Card startCard;
     private ArrayList<Card> cardsOnHand;
-    private PlayerType myType;
+    private final PlayerType myType;
     public enum PlayerType{
         HUMAN,MACHINE
     }

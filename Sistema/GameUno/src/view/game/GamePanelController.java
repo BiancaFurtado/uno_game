@@ -292,7 +292,7 @@ public class GamePanelController implements ViewController, GameEventsInterface 
                                 myView.getLabels(i)[j].setVisible(true);
                                 refreshPlayerCardsCount(i);
                                 Thread.sleep(150);
-                            } catch (Exception e) {
+                            } catch (InterruptedException | IllegalArgumentException e) {
                                 System.out.println("Erro ao atribuir carta");
                             }
 

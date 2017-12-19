@@ -15,8 +15,8 @@ import javax.swing.JOptionPane;
  */
 public class RegisterPanel extends javax.swing.JPanel {
     private RegisterPanelController myController;
-    private final int MAX_ICONS = 5;
-    private ImageIcon[] icons = new ImageIcon[MAX_ICONS];
+    private static final int MAX_ICONS = 5;
+    private final ImageIcon[] icons = new ImageIcon[MAX_ICONS];
     /**
      * Creates new form RegisterPanel
      */

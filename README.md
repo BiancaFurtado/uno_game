@@ -2,11 +2,6 @@
 
 Jogo UNO para desktop.
 
-## Versão
-
-```
-1.0
-```
 
 ## Authors
 * **Lelis Aureliana** - [LelisAureliana](https://github.com/LelisAureliana)

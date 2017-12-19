@@ -63,7 +63,6 @@ public class UserDAO implements DaoInterface{
                 return;
             }
             AppLog.error("Erro desconhecido ao inserir em [User]"+" E: ("+ex.getMessage()+")");
-            return;
         }
     }
 

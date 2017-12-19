@@ -8,5 +8,8 @@
         <node name="EmptyStatements_BLOCK">
             <attribute name="enabled" value="false"/>
         </node>
+        <node name="org.netbeans.modules.java.hints.threading.Tiny.canBeFinal">
+            <attribute name="enabled" value="false"/>
+        </node>
     </tool>
 </configuration>

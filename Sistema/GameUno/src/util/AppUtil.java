@@ -10,6 +10,7 @@ package util;
  * @author sergi
  */
 public class AppUtil {
-    public static int USER_FIRST_CONTACT_VALUE = 1;
-    
+
+    public final static int USER_FIRST_CONTACT_VALUE = 1;
+
 }

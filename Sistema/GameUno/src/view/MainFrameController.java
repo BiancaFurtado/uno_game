@@ -35,15 +35,11 @@ public class MainFrameController {
     public static void exitApp() {
         System.exit(0);
     }
-
- 
-    public MainFrameController(){
-        mainFrame = new MainFrame();
-    }
     /**
      * Metodo para startar a view incial da aplicação
      */
     public static void startView(){
+        mainFrame = new MainFrame();
         mainFrame.setVisible(true);
         //Start Task
         new Thread(() -> {

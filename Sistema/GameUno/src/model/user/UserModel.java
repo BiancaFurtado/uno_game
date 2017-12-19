@@ -17,7 +17,7 @@ import util.AppLog;
  */
 public class UserModel {
     public static User USER_LOGGED;
-    private UserDAO myDAO;
+    private final UserDAO myDAO;
     public UserModel(){
         this.myDAO = new UserDAO();
     }

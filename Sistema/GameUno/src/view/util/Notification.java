@@ -24,8 +24,6 @@ public class Notification extends javax.swing.JPanel {
         initComponents();
         defineType(notificationType);
         labelText.setText(message);
-        this.notifyInterface = notifyInterface;
-
     }
 
     /**
